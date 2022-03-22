@@ -23,39 +23,236 @@ const openingHours = {
 };
 
 const restaurant = {
-
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
- 
+
   openingHours,
 
-  order(starterIndex, mainIndex){
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery({starterIndex = 1, mainIndex = 0, address, time = '20:00'}){
-    console.log(`Order received! ${this.starterMenu
-    [starterIndex]} and ${this.mainMenu
-    [mainIndex]} will be delivered to ${address} at ${time}`);
+  orderDelivery({ starterIndex = 1, mainIndex = 0, address, time = '20:00' }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
   },
 
   //function não precisa mais de "function:" modificação feita nessa função e nas 2 acima.
-  orderPasta(ing1, ing2, ing3){
-    console.log(`Here is your delicious pasta. Made with ${ing1}, ${ing2} and ${ing3}.`);
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta. Made with ${ing1}, ${ing2} and ${ing3}.`
+    );
   },
   //!Mas o jeito antigo é melhor, deixa mais explícito que é uma função
-  orderPizza :function(mainIngredient, ...otherIngredients){
+  orderPizza: function (mainIngredient, ...otherIngredients) {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-
- 
 };
 
-//property NAMES
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+  'Pizza',
+]);
+
+/*
+//!Sources of Data
+//*Data written directly in the source code(e.g status messages)
+//*Data input from user and data written in DOM (e.g tasks in todo app)
+//*From external sources( e.g web APIs) - comes in JSON
+
+//!which data type to use? Well, if it's simple and doesn't require identification, use SETS or ARRAYS.
+//!If it needs an ID, use Maps or OBJETCS
+
+// -> ARRAYS are used when needed an ORDERED list of values(might contain duplicates). Use when you need to manipulate data.
+// ? EXAMPLE -> tasks = ['code', 'eat', 'code'] = "code", "eat", "code" on console
+
+// -> SETS are used when you need to work with UNIQUE VALUES. Use when High Performance is important and to remove duplicates from arrays
+//? EXAMPLE -> tasks = new Set(['code', 'eat', 'code']) = "code", "eat" on console
+
+// -> OBJECTS are more traditional key/value stores. Easier to write and access values with . and []. USE WHEN WORKING WITH JSON AND INCLUDE FUNCTIONS/METHODS
+//? EXAMPLE -> task = [task: "code", date: "today", repeat: true]
+
+// -> MAPS offer better performance, keys can have ANY data type , are easy to iterate and easy to compute size. USE WHEN YOU SIMPLY NEED TO MAP KEY VALUES AND WHEN YOU NEED KEYS THAT ARE NOT STRINGS
+//? EXAMPLE -> task = new Map([[task: "code"], ]date: "today"], [repeat: true]])
+
+
+
+//!Maps: Iteration!
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct!'],
+  [false, 'Try again!'],
+]);
+
+console.log(question);
+
+//Convert Objects to Map
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+
+//Quiz app
+
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === Number) {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+const answer = Number(prompt('Your answer:'));
+//console.log(
+//  `${
+//    answer === question.get('correct')
+//      ? question.get(true)
+//     : question.get(false)
+//  }`
+//);
+console.log(question.get(question.get('correct') === answer));
+
+//Convert map to array
+console.log([...question]);
+
+//console.log(...[question.entries()]);
+console.log(...[question.values()]);
+console.log(...[question.keys()]);
+
+
+
+//!MAPS!
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+rest
+  .set('Categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed!');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+const time = 8;
+console.log(rest.get(time > rest.get(open) && time < rest.get(close)));
+
+console.log(rest.has('categories'));
+rest.delete(2);
+
+const arr = [1, 2];
+rest.set(arr, 'Test');
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+console.log(rest.size);
+//rest.clear();
+console.log(rest.get(arr));
+
+
+//!SETS
+console.log(ordersSet);
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+//ordersSet.clear();
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+//Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+
+console.log(new Set('murilloluisdefrancarodrigues').size);
+
+//sets are not meant to  substitute arrays.
+
+
+//!Challenge 2
+
+//1 - Loop over game.scored and print each player name to the console
+
+for(const [i, scorer] of game.scored.entries()){
+  console.log(`Goal  ${i+1}:  ${scorer} has scored!`)
+}
+
+//2 - Calculate the average odd
+const odds = Object.values(game.odds);
+let average = 0;
+for(const odd of odds) average += odd;
+  average/=odds.length;
+console.log(average);
+
+//3 - Print content of object to the console
+for(const[team, odd] of Object.entries(game.odds)){
+  const teamString = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamString} ${odd}`);
+}
+
+
+//!LOOPING OBJECTS
 const properties = Object.keys(openingHours);
 
 console.log(properties);
@@ -79,7 +276,7 @@ for(const [key, {open, close}] of entries){
   console.log(`On ${key}, we open at ${open} and close at ${close}`);
 }
 
-/*
+
 //!OPTIONAL CHAINING OPERATOR
 if(restaurant.openingHours && restaurant.
 openingHours.mon)

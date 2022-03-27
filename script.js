@@ -105,7 +105,78 @@ const ordersSet = new Set([
   'Pizza',
 ]);
 
+const airline = 'Tap air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.indexOf('Portugal')); //case sensitive
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -2));
+
+const checkMiddleSeat = function (seat) {
+  const s = seat.slice(-1);
+  if (s === 'b' || s === 'e') {
+    console.log('middle seat. Got the middle seat');
+  } else {
+    console.log('Got lucky!');
+  }
+};
+
+checkMiddleSeat('11b');
+checkMiddleSeat('23c');
+checkMiddleSeat('3e');
+
 /*
+//!3rd Challenge
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '� Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '� Substitution'],
+  [64, '� Yellow card'],
+  [69, '� Red card'],
+  [70, '� Substitution'],
+  [72, '� Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '� Yellow card'],
+]);
+
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+gameEvents.delete(64);
+console.log(gameEvents);
+
+console.log(
+  `A game event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+const time = [...gameEvents.keys()].pop();
+console.log(time);
+console.log(
+  `A game event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+for (const [min, value] of gameEvents) {
+  const half = min <= 45 ? 'FIRST' : 'LAST';
+
+  console.log(`[${half} HALF] ${min}: ${value} `);
+}
+
 //!Sources of Data
 //*Data written directly in the source code(e.g status messages)
 //*Data input from user and data written in DOM (e.g tasks in todo app)

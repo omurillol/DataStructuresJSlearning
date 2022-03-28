@@ -105,6 +105,28 @@ const ordersSet = new Set([
   'Pizza',
 ]);
 
+//!Coding challenge of number 4
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'😜'.repeat(i + 1)}`);
+  }
+});
+
+/*
+//!Entire String thing
 const airline = 'Tap air Portugal';
 const plane = 'A320';
 
@@ -140,7 +162,129 @@ checkMiddleSeat('11b');
 checkMiddleSeat('23c');
 checkMiddleSeat('3e');
 
-/*
+//Fix capitalization in Name
+
+const passenger = 'mUrIlLo';
+const passengerLower = passenger.toLocaleLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+//challenge
+
+const functionName = name => {
+  const correctName = name.toLowerCase();
+  console.log(correctName[0].toUpperCase() + correctName.slice(1));
+};
+
+functionName('leOnaRDO');
+
+//comparing emails
+
+const email = 'murillo@luis.io';
+const loginEmail = ' Murillo@Luis.Io \n';
+
+//const lowerEmail = loginEmail.toLowerCase();
+//const trimmedEmail = lowerEmail.trim();
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+const fixingEmail = email => {
+  const normalEmail = 'lillolu@gmail.com';
+  if (email === normalEmail) {
+    console.log('HOORAY! EMAIL CHECKS!');
+  } else {
+    const fixedShit = email.toLowerCase().trim();
+    console.log(fixedShit + ' Pronto, arrumei pra você');
+  }
+};
+
+fixingEmail('lillolu@gmail.com');
+
+//replacing
+
+const priceGB = '1,500E';
+const priceUS = priceGB.replace('E', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers, come to boarding door 23. Boarding door 23!';
+
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate'));
+//or
+// console.log(announcement.replace(/door/g, 'gate'));
+
+//Booleans
+const plane1 = 'Airbus320neo';
+console.log(plane1.includes('320'));
+console.log(plane1.startsWith('Air'));
+
+if (plane1.startsWith('Air') && plane1.endsWith('neo')) {
+  console.log('Part of the NEW airbus family');
+}
+
+//Practice Exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLocaleLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are not allowed to come on board');
+  } else {
+    console.log('Welcome on board!');
+  }
+};
+
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and Camera');
+checkBaggage('Got some Snacks and a Gun for protection');
+
+//split and join
+console.log('a+very+nice+string'.split('+'));
+console.log('Murillo Luis'.split(' '));
+
+const [firstName, lastName] = 'Murillo França'.split(' ');
+
+console.log(firstName);
+console.log(lastName);
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizedName = name => {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    //namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+
+  console.log(namesUpper.join(' '));
+};
+
+capitalizedName('jessica ann smith davis');
+
+//padding
+
+const message = 'Go to gate 23';
+console.log(message.padStart(25, '+').padEnd(35, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(454651321354654));
+
+//Repeat
+
+const message2 = 'Bad weather... All departured delayed... ';
+console.log(message2.repeat(5));
+
+
 //!3rd Challenge
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
